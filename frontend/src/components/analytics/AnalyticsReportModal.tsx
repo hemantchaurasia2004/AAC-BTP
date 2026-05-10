@@ -9,7 +9,6 @@ import {
   CartesianGrid,
   Cell,
   ComposedChart,
-  Legend,
   Line,
   LineChart,
   PolarAngleAxis,
@@ -320,7 +319,6 @@ export function AnalyticsReportView({
                     contentStyle={{ background: "#020617", border: "1px solid #1e293b", borderRadius: 8 }}
                     labelStyle={{ color: "#e2e8f0" }}
                   />
-                  <Legend />
                   <Bar dataKey="baseline" fill="#60a5fa" name="Baseline" radius={[4, 4, 0, 0]} />
                   <Bar dataKey="aac" fill="#22d3ee" name="AAC" radius={[4, 4, 0, 0]}>
                     {trackingBars.map((entry, index) => (
@@ -357,7 +355,6 @@ export function AnalyticsReportView({
                   <XAxis dataKey="t" tick={{ fill: "#94a3b8", fontSize: 10 }} />
                   <YAxis tick={{ fill: "#94a3b8", fontSize: 10 }} />
                   <Tooltip contentStyle={{ background: "#020617", border: "1px solid #1e293b" }} />
-                  <Legend />
                   <Line type="monotone" dataKey="baselineErr" stroke="#60a5fa" dot={false} name="Baseline |e|" />
                   <Line type="monotone" dataKey="aacErr" stroke="#22c55e" dot={false} name="AAC |e|" strokeWidth={2} />
                 </LineChart>
@@ -448,7 +445,6 @@ export function AnalyticsReportView({
                   <XAxis dataKey="t" tick={{ fill: "#94a3b8", fontSize: 10 }} />
                   <YAxis tick={{ fill: "#94a3b8", fontSize: 10 }} />
                   <Tooltip contentStyle={{ background: "#020617", border: "1px solid #1e293b" }} />
-                  <Legend />
                   <Line type="monotone" dataKey="kp" stroke="#38bdf8" dot={false} name="Kp" />
                   <Line type="monotone" dataKey="ki" stroke="#a78bfa" dot={false} name="Ki" />
                   <Line type="monotone" dataKey="kd" stroke="#fbbf24" dot={false} name="Kd" />
@@ -476,7 +472,6 @@ export function AnalyticsReportView({
                   <XAxis dataKey="t" tick={{ fill: "#94a3b8", fontSize: 10 }} />
                   <YAxis tick={{ fill: "#94a3b8", fontSize: 10 }} />
                   <Tooltip contentStyle={{ background: "#020617", border: "1px solid #1e293b" }} />
-                  <Legend />
                   <Line type="monotone" dataKey="rewardBaseProxy" stroke="#60a5fa" dot={false} name="Baseline proxy" />
                   <Line type="monotone" dataKey="reward" stroke="#c084fc" strokeWidth={2} dot={false} name="AAC reward" />
                 </LineChart>
@@ -493,7 +488,6 @@ export function AnalyticsReportView({
                   <PolarAngleAxis dataKey="subject" tick={{ fill: "#cbd5e1", fontSize: 10 }} />
                   <Radar name="Baseline profile" dataKey="baseline" stroke="#60a5fa" fill="#60a5fa" fillOpacity={0.16} />
                   <Radar name="AAC adaptive" dataKey="aac" stroke="#22d3ee" fill="#22d3ee" fillOpacity={0.35} />
-                  <Legend />
                   <Tooltip contentStyle={{ background: "#020617", border: "1px solid #1e293b" }} />
                 </RadarChart>
               </ResponsiveContainer>
@@ -520,7 +514,6 @@ export function AnalyticsReportView({
                   <XAxis dataKey="t" tick={{ fill: "#94a3b8", fontSize: 10 }} />
                   <YAxis tick={{ fill: "#94a3b8", fontSize: 10 }} />
                   <Tooltip contentStyle={{ background: "#020617", border: "1px solid #1e293b" }} />
-                  <Legend />
                   <Line type="monotone" dataKey="confidence" stroke="#22c55e" dot={false} name="Confidence" strokeWidth={2} />
                   <Line type="monotone" dataKey="fallback" stroke="#f97316" dot={false} name="Fallback level" />
                 </LineChart>
@@ -682,7 +675,6 @@ function OscillationReduction({ report }: { report: CycleAnalyticsReport }) {
         <XAxis dataKey="t" tick={{ fill: "#94a3b8", fontSize: 10 }} />
         <YAxis tick={{ fill: "#94a3b8", fontSize: 10 }} />
         <Tooltip contentStyle={{ background: "#020617", border: "1px solid #1e293b" }} />
-        <Legend />
         <Line type="monotone" dataKey="base" stroke="#f97316" dot={false} name="Baseline |Δ²y|" />
         <Line type="monotone" dataKey="aac" stroke="#22c55e" dot={false} name="AAC |Δ²y|" strokeWidth={2} />
       </LineChart>

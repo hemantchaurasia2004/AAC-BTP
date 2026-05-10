@@ -20,6 +20,9 @@ export type WearMetrics = {
 export type PidAdaptationMetrics = {
   gainVariance: number;
   gainSmoothnessScore: number;
+  oscillationIntensityIndex: number;
+  adaptationEfficiency: number;
+  stabilityRecoveryTime: number;
   adaptationResponsiveness: number;
   contextSwitchEfficiencyPct: number;
 };

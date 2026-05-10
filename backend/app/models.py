@@ -51,6 +51,11 @@ class TelemetryFrame(BaseModel):
     settling_time_proxy: float
     control_energy: float
     actuator_wear_index: float
+    oscillation_intensity_index: float = 0.0
+    gain_smoothness_index: float = 0.0
+    adaptation_efficiency: float = 0.0
+    stability_recovery_time: float = 0.0
+    deadband_width: float = 0.0
     system_health: float
     tank_level: float
     flow_rate: float

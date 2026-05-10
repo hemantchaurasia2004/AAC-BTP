@@ -3,6 +3,7 @@
 import { BarChart3 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import type { MouseEvent } from "react";
 import { useTelemetryStore } from "@/store/useTelemetryStore";
 
 const MIN_FRAMES = 12;
@@ -14,6 +15,17 @@ export function CycleAnalyticsToolbar() {
   const buildAnalyticsReport = useTelemetryStore((s) => s.buildAnalyticsReport);
 
   function openReport() {
+    if (!buildAnalyticsReport()) {
+      window.alert(
+        `Need at least ${MIN_FRAMES} telemetry samples (you have ${frameCount}). Stay on the dashboard until the live feed fills the buffer.`,
+      );
+      return;
+    }
+    router.push("/analytics-report");
+  }
+
+  function openLastReportRoute(event: MouseEvent<HTMLAnchorElement>) {
+    event.preventDefault();
     if (!buildAnalyticsReport()) {
       window.alert(
         `Need at least ${MIN_FRAMES} telemetry samples (you have ${frameCount}). Stay on the dashboard until the live feed fills the buffer.`,
@@ -48,6 +60,7 @@ export function CycleAnalyticsToolbar() {
         </button>
         <Link
           href="/analytics-report"
+          onClick={openLastReportRoute}
           className="rounded-md border border-slate-600 px-3 py-1.5 text-xs font-semibold text-slate-100 hover:border-cyan-500/60"
         >
           Last report route

@@ -1,13 +1,32 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useMemo } from "react";
 import { useTelemetrySocket } from "@/hooks/useTelemetrySocket";
 import { useTelemetryStore } from "@/store/useTelemetryStore";
 import { AnalyticsReportView } from "@/components/analytics/AnalyticsReportModal";
+import { computeCycleAnalytics } from "@/lib/analytics/computeCycleAnalytics";
+
+const MIN_FRAMES = 12;
 
 export default function AnalyticsReportPage() {
   useTelemetrySocket();
-  const report = useTelemetryStore((s) => s.analyticsReport);
+  const storedReport = useTelemetryStore((s) => s.analyticsReport);
+  const frames = useTelemetryStore((s) => s.frames);
+  const frameCount = useTelemetryStore((s) => s.frames.length);
+  const buildAnalyticsReport = useTelemetryStore((s) => s.buildAnalyticsReport);
+
+  const report = useMemo(() => {
+    if (storedReport) return storedReport;
+    if (frameCount < MIN_FRAMES) return null;
+    return computeCycleAnalytics(frames, "manual");
+  }, [storedReport, frames, frameCount]);
+
+  useEffect(() => {
+    if (!storedReport && frameCount >= MIN_FRAMES) {
+      buildAnalyticsReport();
+    }
+  }, [storedReport, frameCount, buildAnalyticsReport]);
 
   if (!report) {
     return (
@@ -17,6 +36,9 @@ export default function AnalyticsReportPage() {
         <p className="mt-3 max-w-lg text-sm text-slate-400">
           On the dashboard, wait for telemetry to accumulate, then choose <strong className="text-slate-200">Open report</strong>{" "}
           to build this page from live data.
+        </p>
+        <p className="mt-3 text-xs text-slate-500">
+          Live buffer: {frameCount}/{MIN_FRAMES} frames
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link

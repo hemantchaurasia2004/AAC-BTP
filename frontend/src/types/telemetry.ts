@@ -31,6 +31,11 @@ export interface TelemetryFrame {
   settling_time_proxy: number;
   control_energy: number;
   actuator_wear_index: number;
+  oscillation_intensity_index: number;
+  gain_smoothness_index: number;
+  adaptation_efficiency: number;
+  stability_recovery_time: number;
+  deadband_width: number;
   system_health: number;
   tank_level: number;
   flow_rate: number;

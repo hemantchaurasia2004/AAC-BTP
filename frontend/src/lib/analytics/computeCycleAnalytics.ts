@@ -199,6 +199,9 @@ export function computeCycleAnalytics(
   const dKp = kp.slice(1).map((_, i) => Math.abs(kp[i + 1] - kp[i]));
   const d2Kp = kp.slice(2).map((_, i) => Math.abs(kp[i + 2] - 2 * kp[i + 1] + kp[i]));
   const gainSmoothnessScore = clamp(100 / (1 + 18 * mean(dKp) + 40 * mean(d2Kp)), 0, 100);
+  const oscillationIntensityIndex = mean(sorted.map((f) => f.oscillation_intensity_index));
+  const adaptationEfficiency = mean(sorted.map((f) => f.adaptation_efficiency));
+  const stabilityRecoveryTime = mean(sorted.map((f) => f.stability_recovery_time));
 
   const errDelta = errA.slice(1).map((_, i) => Math.abs(errA[i + 1] - errA[i]));
   const resp = corr(errDelta, dKp);
@@ -390,6 +393,9 @@ export function computeCycleAnalytics(
     pid: {
       gainVariance,
       gainSmoothnessScore,
+      oscillationIntensityIndex,
+      adaptationEfficiency,
+      stabilityRecoveryTime,
       adaptationResponsiveness,
       contextSwitchEfficiencyPct: ctxEff,
     },
